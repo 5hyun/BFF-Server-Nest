@@ -1,0 +1,52 @@
+# IDE
+.idea/
+.vscode/
+
+# Build artifacts
+/dist
+/build
+/out
+/coverage
+
+# Dependency directories
+/node_modules # PnP를 사용하면 이 폴더가 생성되지 않거나 비어있을 수 있지만, 안전을 위해 포함
+
+# Yarn Berry specific files
+.pnp.* # PnP (Plug'n'Play) 관련 파일들 (.pnp.cjs, .pnp.loader.mjs 등)
+.yarn/* # .yarn 디렉토리 전체를 제외 (아래 예외 항목 제외)
+!.yarn/patches       # 패치 파일은 포함 (수정된 의존성 관리)
+!.yarn/plugins       # 플러그인 파일은 포함
+!.yarn/releases      # Yarn Berry 릴리즈 파일은 포함
+!.yarn/sdks          # 에디터 SDK 파일은 포함 (VS Code 등 IDE 지원)
+!.yarn/versions      # Yarn 버전 관리 파일은 포함 (Zero-Install 시 사용)
+
+# Logs
+/npm-debug.log*
+/yarn-debug.log*
+/yarn-error.log*
+/pnpm-debug.log*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Environment variables
+.env
+.env.*
+.env.local
+
+# TypeScript cache
+.tsbuildinfo
+
+# Prisma generated client (if using Prisma)
+/node_modules/.prisma
+/prisma/generated
+
+# Docker related (if using Docker)
+docker-compose.yml
+Dockerfile
+.dockerignore
+
+# Misc
+.DS_Store
+Thumbs.db
