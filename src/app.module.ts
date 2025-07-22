@@ -1,12 +1,16 @@
 // src/app.module.ts
+
 import { Module } from '@nestjs/common';
-import { ConfigModule } from '@nestjs/config'; // ConfigModule 임포트
+import { ConfigModule } from '@nestjs/config';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
-      isGlobal: true, // ConfigService를 전역에서 사용 가능하게 함
+      isGlobal: true,
+      envFilePath: '.env',
     }),
+    AuthModule,
   ],
   controllers: [],
   providers: [],
