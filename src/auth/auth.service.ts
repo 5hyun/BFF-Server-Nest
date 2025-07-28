@@ -82,6 +82,27 @@ export class AuthService {
         }
     }
 
+    /**
+     * @description Access Token의 유효성을 인증 서버에 확인합니다.
+     * @param accessToken 'Bearer '를 포함한 전체 Authorization 헤더 값
+     * @returns 유효하면 true, 아니면 false를 반환합니다.
+     */
+    async validateToken(accessToken: string): Promise<boolean> {
+        try {
+            await firstValueFrom(
+                this.httpService.get(`${this.authApiUrl}/users/validate`, {
+                    headers: { Authorization: accessToken },
+                }),
+            );
+            // 요청이 성공하면 (2xx 응답) 토큰이 유효한 것으로 간주
+            return true;
+        } catch (error) {
+            // 인증 서버에서 401, 403 등의 에러를 반환하면 토큰이 유효하지 않은 것
+            console.error('Token validation failed:', error.response?.data || error.message);
+            return false;
+        }
+    }
+
     private handleApiError(error: any): never {
         if (error instanceof AxiosError && error.response) {
             throw new HttpException(error.response.data, error.response.status);
