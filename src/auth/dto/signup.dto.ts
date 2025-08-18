@@ -1,28 +1,33 @@
-// src/auth/dto/signup.dto.ts
-
-import { IsDateString, IsEmail, IsNotEmpty, IsString, Length, MaxLength } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+import { IsEmail, IsNotEmpty, IsString, MinLength } from 'class-validator';
 
 export class SignUpDto {
-    @IsEmail({}, { message: '이메일 형식이 올바르지 않습니다.' })
-    @IsNotEmpty({ message: '이메일은 필수 입력 값입니다.' })
+    @ApiProperty({
+        description: '가입할 사용자 이메일',
+        example: 'newuser@example.com',
+        required: true,
+    })
+    @IsEmail()
+    @IsNotEmpty()
     email: string;
 
+    @ApiProperty({
+        description: '가입할 사용자 비밀번호 (8자 이상)',
+        example: 'newpassword123',
+        required: true,
+        minLength: 8,
+    })
     @IsString()
-    @Length(8, 30, { message: '비밀번호는 8자 이상 30자 이하이어야 합니다.' })
-    @IsNotEmpty({ message: '비밀번호는 필수 입력 값입니다.' })
+    @IsNotEmpty()
+    @MinLength(8)
     password: string;
 
+    @ApiProperty({
+        description: '사용자 이름',
+        example: '홍길동',
+        required: true,
+    })
     @IsString()
-    @MaxLength(10, { message: '이름은 10자를 넘을 수 없습니다.'})
-    @IsNotEmpty({ message: '이름은 필수 입력 값입니다.' })
-    name: string;
-
-    @IsString()
-    @MaxLength(10, { message: '닉네임은 10자를 넘을 수 없습니다.'})
-    @IsNotEmpty({ message: '닉네임은 필수 입력 값입니다.' })
-    nickName: string;
-
-    @IsDateString()
-    @IsNotEmpty({ message: '생년월일은 필수 입력 값입니다.' })
-    birth: Date;
+    @IsNotEmpty()
+    username: string;
 }

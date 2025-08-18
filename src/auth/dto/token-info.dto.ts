@@ -1,11 +1,13 @@
-// src/auth/dto/token-info.dto.ts
+import { ApiProperty } from '@nestjs/swagger';
 
-/**
- * @description controller와 service에서 공통으로 사용하는 TokenInfo 타입을 정의하고 export 합니다.
- * private한 타입을 public 메서드의 반환 타입으로 사용하여 발생하던 에러를 해결합니다.
- */
-export interface TokenInfo {
-    grantType: string;
+export class TokenInfo {
+    @ApiProperty({
+        description: '발급된 액세스 토큰 (JWT)',
+    })
     accessToken: string;
+
+    @ApiProperty({
+        description: '발급된 리프레시 토큰 (JWT)',
+    })
     refreshToken: string;
 }
